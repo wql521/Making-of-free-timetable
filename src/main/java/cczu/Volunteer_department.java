@@ -66,68 +66,52 @@ public class Volunteer_department {
                 int src = volunteerUtil.judgementClass(getLesson);
 
                 //写入对应单元格内容
+                //都不写入为0 单周写入为1 双周写入为2 单双周都写入为3
                 switch (src){
                     case 1 -> {
-                        if (single_rowCell == null){
-                            Single_row.createCell(i+1);
-                        } else if (bi_weekly_rowCell == null) {
-                            bi_weekly_Row.createCell(i+1);
-                        } else {
-                            single_rowCell.setCellValue(single_rowCell.getStringCellValue()+","+Name);
-                            bi_weekly_rowCell.setCellValue("");
-                            break;
+                        if (single_rowCell.getStringCellValue().equals(" ")){
+                            single_rowCell.setCellValue(Name);
+                        }else {
+                            single_rowCell.setCellValue(single_rowCell.getStringCellValue()+" "+Name);
+                            //bi_weekly_rowCell.setCellValue("");
                         }
                     }
                     case 2 -> {
-                        if (single_rowCell == null){
-                            Single_row.createCell(i+1);
-                        } else if (bi_weekly_rowCell == null) {
-                            bi_weekly_Row.createCell(i+1);
-                        }else{
-                            single_rowCell.setCellValue("");
-                            bi_weekly_rowCell.setCellValue(single_rowCell.getStringCellValue()+","+Name);
-                            break;
+                        if (bi_weekly_rowCell.getStringCellValue().equals(" ")){
+                            bi_weekly_rowCell.setCellValue(Name);
+                        }else {
+                            //single_rowCell.setCellValue("");
+                            bi_weekly_rowCell.setCellValue(bi_weekly_rowCell.getStringCellValue()+" "+Name);
                         }
 
                     }
                     case 3 -> {
-                        if (single_rowCell == null){
-                            Single_row.createCell(i+1);
-                        } else if (bi_weekly_rowCell == null) {
-                            bi_weekly_Row.createCell(i+1);
+                        if (single_rowCell.getStringCellValue().equals(" ") || bi_weekly_rowCell.getStringCellValue().equals(" ")){
+                            single_rowCell.setCellValue(Name);
+                            bi_weekly_rowCell.setCellValue(Name);
                         }else {
-                            single_rowCell.setCellValue(single_rowCell.getStringCellValue()+","+Name);
-                            bi_weekly_rowCell.setCellValue(single_rowCell.getStringCellValue()+","+Name);
-                            break;
+                            single_rowCell.setCellValue(single_rowCell.getStringCellValue()+" "+Name);
+                            bi_weekly_rowCell.setCellValue(bi_weekly_rowCell.getStringCellValue()+" "+Name);
                         }
-
                     }
                     case 0 -> {
-                        if (single_rowCell == null){
-                            Single_row.createCell(i+1);
-                        } else if (bi_weekly_rowCell == null) {
-                            bi_weekly_Row.createCell(i+1);
-                        }else {
-                            single_rowCell.setCellValue("");
-                            bi_weekly_rowCell.setCellValue("");
-                            break;
-                        }
-
+                        //single_rowCell.setCellValue("");
+                        //bi_weekly_rowCell.setCellValue("");
                     }
                 }
             }
 
         }
 
-        //关闭上面输入文件流
-        fileInputStream.close();
+
         //输出文件流
         FileOutputStream fileOutputStream = new FileOutputStream(Path);
         //写入工作簿
         sheets.write(fileOutputStream);
         //关闭输出流
         fileOutputStream.close();
-
+        //关闭上面输入文件流
+        fileInputStream.close();
     }
 
 

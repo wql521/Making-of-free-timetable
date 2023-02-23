@@ -1,10 +1,7 @@
 package cczu;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -35,6 +32,8 @@ public class Volunteer_associations {
     private static void init(String department) throws IOException {
         //创建一个工作簿
         Workbook workbook = new HSSFWorkbook();
+        CellStyle cellStyle = workbook.createCellStyle();
+        cellStyle.setWrapText(true);
         //创建单周工作表
         Sheet Single_week = workbook.createSheet("单周");
         //创建双周工作表
@@ -59,14 +58,16 @@ public class Volunteer_associations {
                 //创建第一列数据
                 Cell cell = rows.createCell(0);
                 Cell cell1 = rows1.createCell(0);
-                cell.setCellValue(j);
-                cell1.setCellValue(j);
+                cell.setCellValue("第"+j+"节课");
+                cell1.setCellValue("第"+j+"节课");
                 //创建第二列到后的单元格
-                for (int i = 1; i < 5; i++) {
+                for (int i = 1; i < 6; i++) {
                     Cell cell2 = rows.createCell(i);
                     cell2.setCellValue(" ");
+                    cell2.setCellStyle(cellStyle);
                     Cell cell3 = rows1.createCell(i);
                     cell3.setCellValue(" ");
+                    cell3.setCellStyle(cellStyle);
                 }
             }
         }
