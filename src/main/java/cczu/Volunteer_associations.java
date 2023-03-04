@@ -88,10 +88,10 @@ public class Volunteer_associations {
         //创建工作表
         for (int i = 0, departmentLength = Department.length; i < departmentLength+1; i++) {
             if (i == departmentLength){
-                Sheet sheet = workbook.createSheet("工程文件");
+                workbook.createSheet("工程文件");
             }else {
                 String s = Department[i];
-                Sheet sheet = workbook.createSheet(s);
+                workbook.createSheet(s);
             }
         }
         FileOutputStream fileOutputStream = new FileOutputStream(middlePATH+"工程文件.xls");

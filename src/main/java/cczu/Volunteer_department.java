@@ -5,6 +5,8 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,12 +14,16 @@ import java.util.ArrayList;
 
 //志愿者部门
 public class Volunteer_department {
+    //存储一节课第几周开始
+    //static ArrayList<String> min_Class = new ArrayList<>();
+    //存储一节课第几周结束
+    //static ArrayList<String> max_Class = new ArrayList<>();
 
     //构造方法私有化
     private Volunteer_department(){}
 
     //获取对应空课表文件
-    public static void fetchFiles() throws IOException {
+    public static void fetchFiles() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         //加载课表文件
         Volunteer.listFilesInit();
         for (int i = 0; i < 7; i++) {
@@ -30,7 +36,6 @@ public class Volunteer_department {
                 writeFiles(filePath,volunteerUtil.getdepartment_filePath(filePath));
             }
         }
-        System.out.println("空课表全部生成！");
     }
 
     //写入对应空课表
@@ -62,7 +67,13 @@ public class Volunteer_department {
                 HSSFCell bi_weekly_rowCell = bi_weekly_Row.getCell(i+1);
 
                 //获取判断结果
+                //在这里可以获得个人的课程信息
                 String getLesson = datList.get(j);
+                /* 获取一个课程的开始周和结束周
+                if (getLesson.length()>0){
+                    volunteerUtil.get_start_over(getLesson);
+                }
+                 */
                 int src = volunteerUtil.judgementClass(getLesson);
 
                 //写入对应单元格内容
@@ -95,8 +106,6 @@ public class Volunteer_department {
                         }
                     }
                     case 0 -> {
-                        //single_rowCell.setCellValue("");
-                        //bi_weekly_rowCell.setCellValue("");
                     }
                 }
             }

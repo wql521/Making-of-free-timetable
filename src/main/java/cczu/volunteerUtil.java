@@ -116,4 +116,45 @@ public final class volunteerUtil {
         return Temp[1];
     }
 
+
+    /* 判断开始周和结束周方法(采用正则表达式)
+    //获取一节课第几周开始，第几周结束
+    public static void get_start_over(String str){
+        String pattern = "(1[0-8]|[0-9])-(1[0-8]|[0-9])";
+
+        ArrayList<String> list = new ArrayList<>();
+
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(str);
+        while (m.find()){
+            String s = m.group();
+            list.add(s);
+        }
+        String min_src = list.get(0);
+        String max_src = list.get(list.size()-1);
+        //第几周开始，记录并且添加到Volunteer_department中的集合中
+        char c = min_src.charAt(0);
+        String s = String.valueOf(c);
+        Volunteer_department.min_Class.add(s);
+        //System.out.println(c);
+
+
+        //用于获取最后一个数据段的列表
+        ArrayList<String> max_List = new ArrayList<>();
+        //对最大时间长度进行截取
+        Pattern compile = Pattern.compile("(1[0-8]|[0-9])");
+        Matcher matcher = compile.matcher(max_src);
+        while (matcher.find()){
+            String s1 = matcher.group();
+            max_List.add(s1);
+        }
+        //第几周结束，记录并且添加到Volunteer_department中的集合中
+        Volunteer_department.max_Class.add(max_List.get(1));
+        //System.out.println(max_List.get(1));
+    }
+
+     */
+
+
+
 }
